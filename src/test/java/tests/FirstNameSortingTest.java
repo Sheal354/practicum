@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertTrue;
 
-@Epic("Управление клиентами")
+@Feature("Фильтрация списка клиентов")
 public class FirstNameSortingTest extends BaseTest{
 
     @BeforeMethod
@@ -23,7 +23,6 @@ public class FirstNameSortingTest extends BaseTest{
         open("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/list");
     }
 
-    @Feature("Фильтрация списка клиентов")
     @Story("Фильтрация клиентов по имени")
     @Description("Проверка фильтрации клиентов по имени в списке.")
     @Test(description = "Firstname Sorting Test")

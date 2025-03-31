@@ -20,7 +20,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertFalse;
 
-@Epic("Управление клиентами")
+@Feature("Создание клиента")
 public class AddCustomerTest extends BaseTest{
 
     @BeforeMethod
@@ -28,12 +28,14 @@ public class AddCustomerTest extends BaseTest{
         open("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/addCust");
     }
 
-    @Feature("Создание клиента")
     @Story("Создание нового клиента с корректными данными")
     @Description("Проверка успешного создания клиента со сгенерированными данными.")
     @Test(dataProvider = "customerData", dataProviderClass = DataProviderHelper.class,
             description = "Add Customer Test")
     public void addCustomerTest(String postCode, String firstName) {
+        // Устанавливаем значение параметра перед запуском теста
+        DataProviderHelper.setNumberOfDataSets(3);
+
         AddCustomerFormPage addCustomerFormPage = page(AddCustomerFormPage.class);
         CustomersListPage customersListPage = page(CustomersListPage.class);
         SoftAssert softAssert = new SoftAssert();
@@ -58,7 +60,6 @@ public class AddCustomerTest extends BaseTest{
         softAssert.assertAll();
     }
 
-    @Feature("Создание клиента")
     @Story("Создание нового клиента с некорректными данными")
     @Description("Проверка, что система не позволяет создать клиента с невалидными данными.")
     @Test(description = "Negative Add Customer Test")

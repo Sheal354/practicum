@@ -8,20 +8,29 @@ import org.testng.annotations.DataProvider;
 public class DataProviderHelper {
 
     /**
+     * Количество тестовых данных
+     */
+    private static int numberOfDataSets = 3;
+
+    /**
+     * Установка количества тестовых данных
+     * @param value количество тестовых данных
+     */
+    public static void setNumberOfDataSets(int value) {
+        numberOfDataSets = value;
+    }
+
+    /**
      * Метод для предоставления тестовых данных.
      * @return двумерный массив с тестовыми данными.
      */
     @DataProvider(name = "customerData")
     public static Object[][] provideCustomerData() {
-        // Количество наборов данных
-        int numberOfDataSets = 3;
         Object[][] data = new Object[numberOfDataSets][2];
 
         for (int i = 0; i < numberOfDataSets; i++) {
-            String postCode = TestDataGenerator.generatePostCode();
-            String firstName = TestDataGenerator.generateFirstName(postCode);
-            data[i][0] = postCode;
-            data[i][1] = firstName;
+            data[i][0] = TestDataGenerator.generatePostCode();
+            data[i][1] = TestDataGenerator.generateFirstName(data[i][0].toString());
         }
         return data;
     }

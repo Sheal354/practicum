@@ -16,7 +16,7 @@ import java.util.List;
 import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
-@Epic("Управление клиентами")
+@Feature("Удаление клиента")
 public class DeleteCustomerTest {
 
     private CustomersListPage customersListPage;
@@ -28,7 +28,6 @@ public class DeleteCustomerTest {
         customersListPage = page(CustomersListPage.class);
     }
 
-    @Feature("Удаление клиента")
     @Story("Удаление существующего клиента")
     @Description("Проверка успешного удаления существующего клиента из системы.")
     @Test(description = "Delete Customer Test")
