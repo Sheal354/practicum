@@ -9,6 +9,7 @@ public class BaseTest {
 
     @BeforeClass
     public void initBeforeClass() {
+        Configuration.remote = "http://localhost:444/wd/hub";
         Configuration.headless = true;
         Configuration.timeout = 3000;
     }
