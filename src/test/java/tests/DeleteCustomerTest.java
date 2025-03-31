@@ -17,7 +17,7 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 
 @Feature("Удаление клиента")
-public class DeleteCustomerTest {
+public class DeleteCustomerTest extends BaseTest{
 
     private CustomersListPage customersListPage;
     private List<String> customerInfo; // Информация о клиенте для воссоздания
