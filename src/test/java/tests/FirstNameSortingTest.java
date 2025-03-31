@@ -1,10 +1,13 @@
 package tests;
 
 import helpers.CustomerDataUtils;
+import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.CustomersList;
-import pages.MainPage;
+import pages.CustomersListPage;
 
 import java.util.List;
 
@@ -12,23 +15,26 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.page;
 import static org.testng.Assert.assertTrue;
 
+@Epic("Управление клиентами")
 public class FirstNameSortingTest extends BaseTest{
 
     @BeforeMethod
     void initBeforeMethod() {
-        open("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager");
+        open("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/manager/list");
     }
 
-    @Test(description = "Sorting by first name test")
+    @Feature("Фильтрация списка клиентов")
+    @Story("Фильтрация клиентов по имени")
+    @Description("Проверка фильтрации клиентов по имени в списке.")
+    @Test
     public void firstNameSortingTest() {
-        MainPage mainPage = page(MainPage.class);
-        CustomersList customersList = page(CustomersList.class);
+        CustomersListPage customersListPage = page(CustomersListPage.class);
 
         // Включение сортировки по имени
-        mainPage.openCustomersList().firstNameSorting();
+        customersListPage.firstNameSorting();
 
         // Получение первых двух имен
-        List<String> firstTwoNames = customersList.getCustomersNames(2);
+        List<String> firstTwoNames = customersListPage.getCustomersNames(2);
         String firstName1 = firstTwoNames.get(0);
         String firstName2 = firstTwoNames.get(1);
 

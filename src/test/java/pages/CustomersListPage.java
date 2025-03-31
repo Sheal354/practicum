@@ -5,16 +5,15 @@ import com.codeborne.selenide.SelenideElement;
 import java.util.ArrayList;
 import java.util.List;
 import io.qameta.allure.Step;
+import pages.elements.MenuButtonsElements;
 
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.$x;
+import static com.codeborne.selenide.Selenide.*;
 
 /**
  * Класс таблицы клиентов
  */
-public class CustomersList {
+public class CustomersListPage {
 
     /**
      * Поле ввода для поиска клиента.
@@ -29,13 +28,14 @@ public class CustomersList {
     /**
      * Фильтр записей клиентов по имени.
      */
-    private final SelenideElement firstNameFilter = $("[ng-click=" +
-            "\"sortType = 'fName'; sortReverse = !sortReverse\"]");
+    private final SelenideElement firstNameFilter = $x("//a[contains(@ng-click, \"sortType = 'fName'\")]");
 
     /**
      * Первая строка данных клиента из таблицы.
      */
     SelenideElement rowCustomerData = $$("tbody tr").first();
+
+    private final MenuButtonsElements menuButtonsElements = new MenuButtonsElements();
 
     /**
      * Ввод данных в поисковик
@@ -43,7 +43,7 @@ public class CustomersList {
      * @return текущий экземпляр класса
      */
     @Step("Поиск клиента в таблице")
-    public CustomersList inputSearchInfo(String firstName) {
+    public CustomersListPage inputSearchInfo(String firstName) {
         searchCustomerInput
                 .shouldBe(visible)
                 .sendKeys(firstName);
@@ -64,24 +64,16 @@ public class CustomersList {
         return $x(xpath).isDisplayed();
     }
 
-    /**
-     * Удаление клиента из таблицы
-     * @return текущий экземпляр класса
-     */
     @Step("Удаление клиента из таблицы")
-    public CustomersList deleteCustomer() {
+    public CustomersListPage deleteCustomer() {
         deleteCustomerButton
                 .shouldBe(visible)
                 .click();
         return this;
     }
 
-    /**
-     * Сортировка записей таблицы клиентов по имени
-     * @return текущий экземпляр класса
-     */
     @Step("Сортировка записей таблицы клиентов по имени")
-    public CustomersList firstNameSorting() {
+    public CustomersListPage firstNameSorting() {
         firstNameFilter
                 .shouldBe(visible)
                 .doubleClick();
@@ -93,6 +85,7 @@ public class CustomersList {
      * @param limit количество записей, где -1 означает получение всех записей
      */
     public List<String> getCustomersNames(int limit) {
+        rowCustomerData.shouldBe(visible);
         ElementsCollection rows = $$("tbody tr");
         return rows.stream()
                 .limit(limit > 0 ? limit : Long.MAX_VALUE) // Берем только первые две строки
@@ -100,10 +93,6 @@ public class CustomersList {
                 .toList();
     }
 
-    /**
-     * Получение данных из строки клиента.
-     * @return список данных клиента: firstName, lastName, postCode
-     */
     public List<String> getRowData() {
         ElementsCollection cells = rowCustomerData.$$("td");
         List<String> rowData = new ArrayList<>();
@@ -112,5 +101,11 @@ public class CustomersList {
             rowData.add(cell.getText().trim());
         }
         return rowData;
+    }
+
+    @Step("Открытие формы создания клиента")
+    public AddCustomerFormPage openAddCustomerForm() {
+        menuButtonsElements.addCustomerButtonClick();
+        return page(AddCustomerFormPage.class);
     }
 }

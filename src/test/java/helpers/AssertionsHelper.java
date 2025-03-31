@@ -3,28 +3,28 @@ package helpers;
 import java.util.List;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
-import pages.CustomersList;
+import pages.CustomersListPage;
 
 
 public class AssertionsHelper {
 
     /**
      * Проверка наличия клиента в таблице
-     * @param customersList экземпляр класса CustomersList
+     * @param customersListPage экземпляр класса CustomersListPage
      * @param customerInfo данные клиента: postCode, firstName, lastName
      */
-    public static void assertCustomerExists(CustomersList customersList, List<String> customerInfo) {
-        Assert.assertTrue(customersList.isRowExists(customerInfo.get(2), customerInfo.get(0), customerInfo.get(1)),
+    public static void assertCustomerExists(CustomersListPage customersListPage, List<String> customerInfo) {
+        Assert.assertTrue(customersListPage.isRowExists(customerInfo.get(2), customerInfo.get(0), customerInfo.get(1)),
                 "Customer not found!");
     }
 
     /**
      * Проверка удаления клиента
-     * @param customersList экземпляр класса CustomersList
+     * @param customersListPage экземпляр класса CustomersListPage
      * @param customerInfo данные клиента: postCode, firstName, lastName
      */
-    public static void assertCustomerDeleted(CustomersList customersList, List<String> customerInfo) {
-        Assert.assertFalse(customersList.isRowExists(customerInfo.get(2), customerInfo.get(0), customerInfo.get(1)),
+    public static void assertCustomerDeleted(CustomersListPage customersListPage, List<String> customerInfo) {
+        Assert.assertFalse(customersListPage.isRowExists(customerInfo.get(2), customerInfo.get(0), customerInfo.get(1)),
                 "Customer not deleted!");
     }
 

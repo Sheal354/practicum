@@ -8,7 +8,7 @@ import static com.codeborne.selenide.Selenide.$;
 /**
  * Класс кнопок меню.
  */
-public class MenuButtons {
+public class MenuButtonsElements {
 
     /**
      * Кнопка Add Customer.

@@ -2,30 +2,30 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.example</groupId>
-    <artifactId>java-training</artifactId>
+    <artifactId>practicum</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
+        <aspectj.version>1.9.23</aspectj.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-testng</artifactId>
             <version>2.29.1</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.codeborne/selenide -->
         <dependency>
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>7.7.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
@@ -33,14 +33,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>2.0.17</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -48,17 +46,23 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.11.0</version>
         </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.13.2</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.23</version>
         </dependency>
     </dependencies>
 
@@ -85,9 +89,12 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.22.2</version>
                 <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                     <suiteXmlFiles>
                         <suiteXmlFile>
-                            UI-work/src/resources/suites/tests_default.xml
+                            src/test/resources/suites/tests_default.xml
                         </suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>

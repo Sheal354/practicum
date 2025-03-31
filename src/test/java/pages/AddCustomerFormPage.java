@@ -2,6 +2,7 @@ package pages;
 
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
+import pages.elements.MenuButtonsElements;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -11,7 +12,7 @@ import static com.codeborne.selenide.Selenide.page;
 /**
  * Класс формы создания клиента
  */
-public class AddCustomerForm {
+public class AddCustomerFormPage {
 
     /**
      * Поле ввода First Name.
@@ -34,6 +35,8 @@ public class AddCustomerForm {
     private final SelenideElement addCustomerButton = $x("//button[@type='submit' " +
             "and contains(text(),'Add Customer')]");
 
+    private final MenuButtonsElements menuButtonsElements = new MenuButtonsElements();
+
     /**
      * Ввод данных в поля ввода
      * @param postCode строка, представляющая Post Code клиента.
@@ -42,7 +45,7 @@ public class AddCustomerForm {
      * @return текущий экземпляр класса
      */
     @Step("Заполнение полей формы")
-    public AddCustomerForm inputCustomerInfo(String postCode, String firstName, String lastName) {
+    public AddCustomerFormPage inputCustomerInfo(String postCode, String firstName, String lastName) {
         postCodeInput
                 .shouldBe(visible)
                 .sendKeys(postCode);
@@ -55,16 +58,18 @@ public class AddCustomerForm {
         return this;
     }
 
-    /**
-     * Нажатие на кнопку Add Customer
-     * @return экземпляр класса MainPage
-     */
     @Step("Подтверждение заполнения формы")
-    public MainPage submitForm() {
+    public AddCustomerFormPage submitForm() {
         addCustomerButton
                 .shouldBe(visible)
                 .click();
-        return page(MainPage.class);
+        return this;
+    }
+
+    @Step("Открытие таблицы клиентов")
+    public CustomersListPage openCustomersList() {
+        menuButtonsElements.customersButtonClick();
+        return page(CustomersListPage.class);
     }
 
 }
