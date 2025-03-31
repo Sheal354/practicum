@@ -26,7 +26,7 @@ public class FirstNameSortingTest extends BaseTest{
     @Feature("Фильтрация списка клиентов")
     @Story("Фильтрация клиентов по имени")
     @Description("Проверка фильтрации клиентов по имени в списке.")
-    @Test
+    @Test(description = "Firstname Sorting Test")
     public void firstNameSortingTest() {
         CustomersListPage customersListPage = page(CustomersListPage.class);
 

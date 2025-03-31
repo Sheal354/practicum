@@ -31,7 +31,8 @@ public class AddCustomerTest extends BaseTest{
     @Feature("Создание клиента")
     @Story("Создание нового клиента с корректными данными")
     @Description("Проверка успешного создания клиента со сгенерированными данными.")
-    @Test(dataProvider = "customerData", dataProviderClass = DataProviderHelper.class)
+    @Test(dataProvider = "customerData", dataProviderClass = DataProviderHelper.class,
+            description = "Add Customer Test")
     public void addCustomerTest(String postCode, String firstName) {
         AddCustomerFormPage addCustomerFormPage = page(AddCustomerFormPage.class);
         CustomersListPage customersListPage = page(CustomersListPage.class);
@@ -60,7 +61,7 @@ public class AddCustomerTest extends BaseTest{
     @Feature("Создание клиента")
     @Story("Создание нового клиента с некорректными данными")
     @Description("Проверка, что система не позволяет создать клиента с невалидными данными.")
-    @Test
+    @Test(description = "Negative Add Customer Test")
     public void negativeAddCustomerTest() {
         AddCustomerFormPage addCustomerFormPage = page(AddCustomerFormPage.class);
         // Попытка создания клиента без заполнения полей

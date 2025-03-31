@@ -31,7 +31,7 @@ public class DeleteCustomerTest {
     @Feature("Удаление клиента")
     @Story("Удаление существующего клиента")
     @Description("Проверка успешного удаления существующего клиента из системы.")
-    @Test
+    @Test(description = "Delete Customer Test")
     public void deleteCustomerTest() {
         // Найти имя ближайшее к среднему
         List<String> customersNames = customersListPage.getCustomersNames(-1);
