@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="autoTests" verbose="1" parallel="classes" thread-count="3">
+    <parameter name="numberOfDataSets" value="3" />
+    <test name="Tests" >
+        <classes>
+            <class name="tests.AddCustomerTest" />
+            <class name="tests.FirstNameSortingTest" />
+            <class name="tests.DeleteCustomerTest" />
+        </classes>
+    </test>
+
+</suite>
