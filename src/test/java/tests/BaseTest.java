@@ -11,7 +11,7 @@ public class BaseTest {
 
     @BeforeClass
     public void initBeforeClass() {
-        Configuration.remote = "http://localhost:4444/wd/hub";
+        Configuration.remote = "http://selenoid:4444/wd/hub";
         Configuration.headless = true;
         Configuration.timeout = 3000;
     }
